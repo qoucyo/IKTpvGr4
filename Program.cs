@@ -27,22 +27,40 @@ namespace Intro
             GetProductList();
             int b = int.Parse(Console.ReadLine());
 
-            Console.Clear();
+            Clear();
 
             switch (b)
             {
 
-                case 1:     
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You successfully bought Coca Cola for 120$");
+                case 1:
+                    if (CheckMoney(120))
+                    {
+                        ChangeColor(ConsoleColor.Red);
+                        Console.WriteLine("You successfully bought Coca Cola for 120$");
+                        break;
+                    }
+                    ChangeColor(ConsoleColor.Red);
+                    Console.WriteLine("You dont have enough money!");
                     break;
                 case 2:
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("You successfully bought Pepsi for 100$");
+                    if (CheckMoney(100))
+                    {
+                        ChangeColor(ConsoleColor.Blue);
+                        Console.WriteLine("You successfully bought Pepsi for 100$");
+                        break;
+                    }
+                    ChangeColor(ConsoleColor.Red);
+                    Console.WriteLine("You dont have enough money!");
                     break;
                 case 3:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("You successfully bought Fanta for 80$");
+                    if (CheckMoney(80))
+                    {
+                        ChangeColor(ConsoleColor.Yellow);
+                        Console.WriteLine("You successfully bought Fanta for 80$");
+                        break;
+                    }
+                    ChangeColor(ConsoleColor.Red);
+                    Console.WriteLine("You dont have enough money!");
                     break;
                 default:
                     Console.WriteLine("This product not in list");
@@ -51,13 +69,17 @@ namespace Intro
 
             }
 
+            Sleep(3000);
+            Clear();
+            Console.WriteLine($"You have left {money}$");
+
             Console.ReadLine();
         }
 
        static void GetProductList()
 
         {
-            Console.Clear();
+            Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("1. Coca Cola - 120$");
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -73,20 +95,21 @@ namespace Intro
 
 
 
-            money =- cost;
+            var newmoney = money - cost;
+            money = newmoney;
             return true; 
         }
 
         static void GiveMoney(int count)
         {
-            Console.Clear();
+            Clear();
             money += count;
             
-            Console.WriteLine($"We succesfully transfer you"); 
+            Console.Write($"We succesfully transfer you"); 
             ChangeColor(ConsoleColor.Green);
-            Console.Write($"{count}$");
+            Console.Write($" {count}$");
             Sleep(2000);
-            Console.Clear();
+            Clear();
 
 
 
@@ -100,6 +123,7 @@ namespace Intro
         {
             Thread.Sleep((int)time);
         }
-
+        static void Clear()
+        { Console.Clear(); }
 }
 }
