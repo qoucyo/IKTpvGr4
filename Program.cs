@@ -89,18 +89,17 @@ namespace Intro
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        static bool CheckMoney(int cost)
+       static bool CheckMoney(int cost)
         {
             if (money < cost) return false;
 
 
 
-            var newmoney = money - cost;
-            money = newmoney;
+            RemoveMoney(cost);
             return true; 
         }
 
-        static void GiveMoney(int count)
+       static void GiveMoney(int count)
         {
             Clear();
             money += count;
@@ -114,16 +113,21 @@ namespace Intro
 
 
         }
-
-        static void ChangeColor(ConsoleColor color)
+       
+       static void RemoveMoney(int cost)
+       {
+            var newmoney = money - cost;
+            money = newmoney;
+        }
+       static void ChangeColor(ConsoleColor color)
         {
             Console.ForegroundColor = color; 
         }       
-        static void Sleep(int time)
+       static void Sleep(int time)
         {
             Thread.Sleep((int)time);
         }
-        static void Clear()
+       static void Clear()
         { Console.Clear(); }
 }
 }
